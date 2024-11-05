@@ -1,8 +1,13 @@
-version: "3"
+version: '3'
 services:
-    redis-server:
-      image: "redis"
-    node-app:
-      build:
-      ports:
-        - "5000:8080"
+  redis-server:
+    image: redis
+    ports:
+      - "6379:6379"
+      
+  node-app:
+    build: .  # 현재 디렉토리를 빌드 컨텍스트로 설정
+    ports:
+      - "5000:8080"
+    depends_on:
+      - redis-server
